@@ -1,3 +1,4 @@
+// Getting All Elements
 let randomize_array = document.getElementById("randomize_array_btn");
 let sortButton = document.getElementById("sort_btn");
 let bars_container = document.getElementById("bars_container");
@@ -12,6 +13,7 @@ let speedFactor = 100;
 let unsortedArray = new Array(numOfBars);
 let solve = document.getElementById("foot");
 
+// Input Function for range
 slider.addEventListener("input", function () {
   numOfBars = slider.value;
   maxRange = slider.value;
@@ -20,16 +22,20 @@ slider.addEventListener("input", function () {
   renderBars(unsortedArray);
 });
 
+// Speed
 speed.addEventListener("change", (e) => {
   speedFactor = parseInt(e.target.value);
 });
 
+
+// Algorithm Change
 let algorithmToUse = "";
 
 select_algo.addEventListener("change", function () {
   algorithmToUse = select_algo.value;
 });
 
+// Random Number Generator
 function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -57,6 +63,7 @@ function renderBars(array) {
   }
 }
 
+// Randomize Array
 randomize_array.addEventListener("click", function () {
   unsortedArray = createRandomArray();
   bars_container.innerHTML = "";
@@ -67,6 +74,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Bubble Sort Algorithm
 async function bubbleSort(array) {
   let bars = document.getElementsByClassName("bar");
   for (let i = 0; i < array.length; i++) {
@@ -111,6 +119,7 @@ async function swap(items, leftIndex, rightIndex, bars) {
   bars[rightIndex].style.backgroundColor = "lightgreen";
   await sleep(speedFactor);
 }
+
 async function partition(items, left, right) {
   let bars = document.getElementsByClassName("bar");
   let pivotIndex = Math.floor((right + left) / 2);
@@ -142,6 +151,7 @@ async function partition(items, left, right) {
   return i;
 }
 
+// Quick Sort Algorithm
 async function quickSort(items, left, right) {
   var index;
   let bars = document.getElementsByClassName("bar");
@@ -172,7 +182,7 @@ async function quickSort(items, left, right) {
   return items;
 }
 
-//write insertion sort function
+// Insertion Sort Algorithm
 async function insertionSort(array) {
   let bars = document.getElementsByClassName("bar");
   for (let i = 1; i < array.length; i++) {
@@ -212,7 +222,7 @@ async function insertionSort(array) {
   return array;
 }
 
-//write heap sort function
+// Heap Sort Algorithm
 async function heapSort(array) {
   let bars = document.getElementsByClassName("bar");
   for (let i = Math.floor(array.length / 2); i >= 0; i--) {
@@ -273,7 +283,7 @@ async function swap(array, i, j, bars) {
   return array;
 }
 
-//write mergeSort function
+// Merge Sort Algorithm
 async function mergeSort(arr) {
   let bars = document.getElementsByClassName("bar");
   if (arr.length < 2) {
@@ -343,19 +353,7 @@ async function mergeSort(arr) {
   return arr;
 }
 
-function mergeSortD(arr, start, end) {
-  if (arr.length < 2) {
-    return arr;
-  }
-
-  let middle = Math.floor((start + end) / 2);
-  let left = arr.slice(start, middle);
-  let right = arr.slice(middle, end);
-
-  //mergeSort(left);
-  mergeSort(right);
-}
-
+// Sorting
 sortButton.addEventListener("click", function () {
   solve.innerHTML = "";
   solve.style.backgroundColor = "black";
